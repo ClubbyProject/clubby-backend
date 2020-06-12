@@ -1,16 +1,23 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Clubby.Models
 {
-    public class Event
+    public partial class Event
     {
-        public int ID { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public Event()
+        {
+            Post = new HashSet<Post>();
+        }
 
-        public ICollection<Post> Posts { get; set; }
-        public Club CreateByClub { get; set; }
-        public User CreateByUser { get; set; }
+        public int Id { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public int? CreateByClub { get; set; }
+        public int? CreateByUser { get; set; }
+
+        public virtual Club CreateByClubNavigation { get; set; }
+        public virtual User CreateByUserNavigation { get; set; }
+        public virtual ICollection<Post> Post { get; set; }
     }
 }

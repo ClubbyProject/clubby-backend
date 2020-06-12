@@ -1,0 +1,16 @@
+version: "3"
+services:
+    db:
+        image: mcr.microsoft.com/mssql/server:2019-CU4-ubuntu-16.04
+        environment: 
+            - "ACCEPT_EULA=Y"
+            - "SA_PASSWORD=p@ssowr0d"
+        ports: 
+            - "1433:1433"
+    backend:
+        build:
+            context: ./
+            args: 
+                project_name: "Clubby"
+        ports: 
+            - "80:80"

@@ -1,14 +1,20 @@
+﻿using System;
 using System.Collections.Generic;
 
 namespace Clubby.Models
 {
-    public class Club
+    public partial class Club
     {
-        public int ID { get; set; }
+        public Club()
+        {
+            Event = new HashSet<Event>();
+            Post = new HashSet<Post>();
+        }
+
+        public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
-        public ICollection<UserInClub> Users { get; set; }
-        public ICollection<Admin> Admins { get; set; }
+        public virtual ICollection<Event> Event { get; set; }
+        public virtual ICollection<Post> Post { get; set; }
     }
 }
