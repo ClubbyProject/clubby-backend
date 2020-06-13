@@ -27,9 +27,10 @@ namespace Clubby
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Console.WriteLine(Configuration.GetConnectionString("Clubby"));
             services.AddDbContext<ClubbyContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Clubby")));
             services.AddControllers();
+
+            services.AddSwaggerDocument();  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,11 +41,15 @@ namespace Clubby
                 app.UseDeveloperExceptionPage();
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseEndpoints(endpoints =>
             {
