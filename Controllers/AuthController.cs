@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Google.Apis.Auth;
 using Microsoft.Extensions.Caching.Memory;
-using Clubby.Extensions;
 
 namespace Clubby.Controllers
 {
