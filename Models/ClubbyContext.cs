@@ -102,7 +102,7 @@ namespace Clubby.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Post_Club");
 
-                entity.HasOne(d => d.CreateByNavigation)
+                entity.HasOne(d => d.CreateByUser)
                     .WithMany(p => p.Post)
                     .HasForeignKey(d => d.CreateBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)

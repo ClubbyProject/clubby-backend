@@ -14,7 +14,7 @@ namespace Clubby.Models
         public int CreateBy { get; set; }
 
         public virtual Club Club { get; set; }
-        public virtual User CreateByNavigation { get; set; }
+        public virtual User CreateByUser { get; set; }
         public virtual Event Event { get; set; }
     }
 }
