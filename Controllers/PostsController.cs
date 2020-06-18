@@ -24,8 +24,9 @@ namespace Clubby.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPostList()
         {
-            return await _context.Post.OrderByDescending(x => x.CreateAt).ToListAsync();
+            return await _context.Post.OrderByDescending(x => x.CreateAt)
+                                      .Take(100)
+                                      .ToListAsync();
         }
-
     }
 }

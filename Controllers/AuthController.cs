@@ -29,7 +29,6 @@ namespace Clubby.Controllers
             _logger = logger;
             _config = config;
             _cache = cache;
-
         }
 
 
