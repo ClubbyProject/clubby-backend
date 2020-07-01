@@ -57,7 +57,7 @@ namespace Clubby.Controllers
                 await _context.User.AddAsync(new User()
                 {
                     Name = payload.Email,
-                    Nick = payload.Name,
+                    Nick = payload.Email.Split('@').FirstOrDefault(),
                     Token = payload.Subject
                 });
                 await _context.SaveChangesAsync();

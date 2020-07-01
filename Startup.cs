@@ -33,6 +33,16 @@ namespace Clubby
             services.AddControllers();
 
             services.AddSwaggerDocument();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AnyOrigin", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,11 +57,12 @@ namespace Clubby
 
             app.UseRouting();
 
+            app.UseCors("AnyOrigin");
+
             app.UseAuthorization();
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
-
 
             app.UseEndpoints(endpoints =>
             {

@@ -12,9 +12,10 @@ namespace Clubby.Models
         public string Context { get; set; }
         public DateTime CreateAt { get; set; }
         public int CreateBy { get; set; }
+        public string ImageList { get; set; }
 
         public virtual Club Club { get; set; }
-        public virtual User CreateByUser { get; set; }
+        public virtual User CreateByNavigation { get; set; }
         public virtual Event Event { get; set; }
     }
 }

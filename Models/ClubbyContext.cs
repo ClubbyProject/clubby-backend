@@ -94,6 +94,11 @@ namespace Clubby.Models
 
                 entity.Property(e => e.EventId).HasColumnName("EventID");
 
+                entity.Property(e => e.ImageList)
+                    .IsRequired()
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('')");
+
                 entity.Property(e => e.Title).IsRequired();
 
                 entity.HasOne(d => d.Club)
@@ -102,7 +107,7 @@ namespace Clubby.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Post_Club");
 
-                entity.HasOne(d => d.CreateByUser)
+                entity.HasOne(d => d.CreateByNavigation)
                     .WithMany(p => p.Post)
                     .HasForeignKey(d => d.CreateBy)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -124,7 +129,6 @@ namespace Clubby.Models
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(30)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nick)
