@@ -6,6 +6,7 @@ RUN dotnet publish $project_name -o /publish --configuration Release
 
 ### Publish Stage
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+ENV TZ="Asia/Taipei"
 ARG project_name
 WORKDIR /app
 COPY --from=dotnet-build-env /publish .

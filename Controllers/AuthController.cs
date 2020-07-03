@@ -66,7 +66,7 @@ namespace Clubby.Controllers
             var user = await _context.User.Where(x => x.Token == payload.Subject).FirstOrDefaultAsync();
             var sessionToken = Guid.NewGuid().ToString();
 
-            var cacheOpt = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromHours(8));
+            var cacheOpt = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(8)).SetAbsoluteExpiration(TimeSpan.FromHours(8));
             _cache.Set(sessionToken, user.Id, cacheOpt);
 
             return sessionToken;

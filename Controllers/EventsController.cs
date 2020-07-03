@@ -24,6 +24,8 @@ namespace Clubby.Controllers
         public async Task<ActionResult<IEnumerable<Event>>> GetEventList()
         {
             return await _context.Event.OrderByDescending(x => x.StartTime)
+                                       .Include(x => x.CreateByClubNavigation)
+                                       .Include(x => x.Post)
                                        .ToListAsync();
         }
 
@@ -31,6 +33,8 @@ namespace Clubby.Controllers
         public async Task<ActionResult<IEnumerable<Event>>> GetEventListByMonthx(int month)
         {
             return await _context.Event.Where(x => (x.StartTime.Value.Month == month || x.EndTime.Value.Month == month))
+                                       .Include(x => x.CreateByClubNavigation)
+                                       .Include(x => x.Post)
                                        .OrderByDescending(x => x.StartTime)
                                        .ToListAsync();
         }

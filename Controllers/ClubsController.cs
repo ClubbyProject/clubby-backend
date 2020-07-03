@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Clubby.Models;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.Caching.Memory;
+using System.Text.RegularExpressions;
 
 namespace Clubby.Controllers
 {
@@ -28,6 +29,14 @@ namespace Clubby.Controllers
         {
             return await _context.Club.ToListAsync();
         }
+        [HttpGet("{ClubId}/post")]
+        public async Task<ActionResult<IEnumerable<Club>>> GetPost(int ClubId)
+        {
+            return await _context.Club.Where(x => x.Id == ClubId)
+                                      .Include(x => x.Post)
+                                      .ToListAsync();
+        }
+
 
         [HttpPost("{ClubId}/post")]
         public async Task<ActionResult<int>> AddPost([FromBody] PostContext context, int ClubId)
@@ -37,7 +46,7 @@ namespace Clubby.Controllers
                 return Unauthorized();
 
             int userid;
-            if (!_cache.TryGetValue(token, out userid))
+            if (!_cache.TryGetValue(token.ToString(), out userid))
                 return Unauthorized();
 
             if (!_context.Admin.Any(x => x.UserId == userid && x.ClubId == ClubId))
@@ -49,6 +58,7 @@ namespace Clubby.Controllers
                 EventId = null,
                 Title = context.Title,
                 Context = context.Content,
+                ImageList = context.ImageList,
                 CreateBy = userid
             });
 

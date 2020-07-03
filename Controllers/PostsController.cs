@@ -26,6 +26,7 @@ namespace Clubby.Controllers
         {
             return await _context.Post.OrderByDescending(x => x.CreateAt)
                                       .Take(100)
+                                      .Include(post=> post.Club)
                                       .ToListAsync();
         }
     }
